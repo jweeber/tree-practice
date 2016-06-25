@@ -15,55 +15,94 @@ def print_infix(node)
   print_infix(node.right)
 end
 
+def print_prefix(node)
+  return if node == nil
+  print node.value + " "
+  print_infix(node.left)
+  print_infix(node.right)
+end 
+
+def print_postfix(node)
+  return if node == nil
+  print_infix(node.left)
+  print_infix(node.right)
+  print node.value + " "
+end
+
 def operators(node)
   return if node == nil
+  operators(node.left)
   if node.value.match(/\+|\-|\/|\%|\*/)
     print node.value
   end
+  operators(node.right)
 end
 
-puts "\nFirst expression:"
-root = TreeNode.new("+")
-root.left = TreeNode.new("3")
-root.right = TreeNode.new("2")
-print_infix(root)
-puts "\nFirst expression operators:\n"
-operators(root)
+def non_operators(node)
+  return if node == nil
+  non_operators(node.left)
+  if node.value.match(/\d/)
+    print node.value + " "
+  end
+  non_operators(node.right)
+end
 
-puts "\nSecond expression:"
-second = TreeNode.new("-")
-second.right = TreeNode.new("10")
-second.left = TreeNode.new("+")
-second.left.right = TreeNode.new("2")
-second.left.left = TreeNode.new("3")
-print_infix(second)
-puts "\nSecond expression operators:\n"
-operators(second)
 
-puts "\nThird expression:"
-third = TreeNode.new("+")
-third.right = TreeNode.new("2")
-third.left = TreeNode.new("*")
-third.left.right = TreeNode.new("3")
-third.left.left = TreeNode.new("4")
-print_infix(third)
-puts "\nThird expression operators:\n"
-operators(third)
+# def operator?(node, operand)
+#   return if node == nil
+#   operator?(node.left, operand)
+#   if node.value == operand
+#     return true
+#   end
+#   operator?(node.right, operand)
+# end
 
-puts "\nFourth expression:"
-fourth = TreeNode.new("-")
-fourth.right = TreeNode.new("%")
-fourth.right.right = TreeNode.new("5")
-fourth.right.left = TreeNode.new("10")
-fourth.left = TreeNode.new("2")
-fourth.left.right = TreeNode.new("+")
-fourth.left.right.right = TreeNode.new("*")
-fourth.left.right.right.right = TreeNode.new("3")
-fourth.left.right.right.left = TreeNode.new("4")
-print_infix(fourth)
-puts "\nFourth expression operators:\n"
-operators(fourth) 
-print "\n"
+# ----------------------------------------------------
+
+# Creating binary trees (in class)
+
+# puts "\nFirst expression:"
+# root = TreeNode.new("+")
+# root.left = TreeNode.new("3")
+# root.right = TreeNode.new("2")
+# print_infix(root)
+# puts "\nFirst expression operators:\n"
+# operators(root)
+
+# puts "\nSecond expression:"
+# second = TreeNode.new("-")
+# second.right = TreeNode.new("10")
+# second.left = TreeNode.new("+")
+# second.left.right = TreeNode.new("2")
+# second.left.left = TreeNode.new("3")
+# print_infix(second)
+# puts "\nSecond expression operators:\n"
+# operators(second)
+
+# puts "\nThird expression:"
+# third = TreeNode.new("+")
+# third.right = TreeNode.new("2")
+# third.left = TreeNode.new("*")
+# third.left.right = TreeNode.new("3")
+# third.left.left = TreeNode.new("4")
+# print_infix(third)
+# puts "\nThird expression operators:\n"
+# operators(third)
+
+# puts "\nFourth expression:"
+# fourth = TreeNode.new("-")
+# fourth.right = TreeNode.new("%")
+# fourth.right.right = TreeNode.new("5")
+# fourth.right.left = TreeNode.new("10")
+# fourth.left = TreeNode.new("2")
+# fourth.left.right = TreeNode.new("+")
+# fourth.left.right.right = TreeNode.new("*")
+# fourth.left.right.right.right = TreeNode.new("3")
+# fourth.left.right.right.left = TreeNode.new("4")
+# print_infix(fourth)
+# puts "\nFourth expression operators:\n"
+# operators(fourth) 
+# print "\n"
 
 
 # PSEUDOCODE
@@ -157,11 +196,18 @@ first_tree.left.right = TreeNode.new("2")
 first_tree.left.left = TreeNode.new("10")
 
 puts "First Tree Test:\n"
+print_infix(first_tree)
+puts "\n"
 operators(first_tree)
+puts "\n"
 non_operators(first_tree)
-operator?(first_tree, "-")
-operator(first_tree, "+")
+# puts "\n"
+# operator?(first_tree, "-")
+# puts "\n"
+# operator?(first_tree, "+")
+puts "\n"
 print_prefix(first_tree)
+puts "\n"
 print_postfix(first_tree)
 
 
@@ -172,11 +218,18 @@ second_tree.left.right = TreeNode.new("1")
 second_tree.left.left = TreeNode.new("8")
 
 puts "\nSecond Tree Test:\n"
+print_infix(second_tree)
+puts "\n"
 operators(second_tree)
+puts "\n"
 non_operators(second_tree)
-operator?(second_tree, "+")
-operator(second_tree, "%")
+# puts "\n"
+# operator?(second_tree, "+")
+# puts "\n"
+# operator?(second_tree, "%")
+puts "\n"
 print_prefix(second_tree)
+puts "\n"
 print_postfix(second_tree)
 
 third_tree = TreeNode.new("-")
@@ -190,11 +243,18 @@ third_tree.left.right.right.right = TreeNode.new("10")
 third_tree.left.right.right.left = TreeNode.new("2")
 
 puts "\nThird Tree Test:\n"
+print_infix(third_tree)
+puts "\n"
 operators(third_tree)
+puts "\n"
 non_operators(third_tree)
-operator?(third_tree, "%")
-operator(third_tree, "/")
+# puts "\n"
+# operator?(third_tree, "%")
+# puts "\n"
+# operator?(third_tree, "/")
+puts "\n"
 print_prefix(third_tree)
+puts "\n"
 print_postfix(third_tree)
 
 puts "\n\n"
