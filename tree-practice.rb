@@ -47,7 +47,7 @@ def non_operators(node)
   non_operators(node.right)
 end
 
-
+# This one is not working...
 # def operator?(node, operand)
 #   return if node == nil
 #   operator?(node.left, operand)
